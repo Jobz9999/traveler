@@ -47,8 +47,13 @@ header div {
   line-height: 30px;
 }
 
+a {
+  text-decoration: none;
+}
+
 a:hover {
   color: aqua!important;
+  text-decoration: underline;
 }
 
 #head-top {
