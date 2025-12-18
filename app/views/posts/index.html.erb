@@ -7,7 +7,7 @@
       <% @posts.each do |post| %>
         <div class="one-post col-sm-4 mb-3">
           <%= link_to post_path(post) do %>
-            <p class="caption">ユーザ名</p>
+            <p class="caption"><%= post.user.name %></p>
             <%= attachment_image_tag post, :image, format: 'jpeg', size: '300x200' %>
             <p class="caption"><%= post.location %></p>
             <p class="caption"><%= "#{post.comments.count} コメント" %></p>
