@@ -7,6 +7,18 @@
       　<h1 class="font-weight-normal"><%= @user.name %>さんのページ</h1>
       <% end %>
     </div>
+
+    <% if user_signed_in? && @user == current_user %>
+      <p class="d-flex align-self-end">
+        <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success" %>
+      </p>
+    <% end %>
+    <div class="d-flex w-100">
+      <%= attachment_image_tag @user, :profile_image, size: '100x100', fallback: "no_image.svg", class: "mb-3 profile-img" %>
+      <h4 class="ml-3 mb-3 card w-100 profile"><%= @user.profile %></h4>
+    </div>
+
+
     <div class="row mt-5 index-left w-100">
       <% @posts.each do |post| %>
         <div class="one-post col-sm-3 mb-3">
