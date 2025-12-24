@@ -3,6 +3,16 @@
     <div class="row">
       <h1 class="font-weight-normal mt-5 mb-5">旅行投稿編集</h1>
     </div>
+    
+    <% if @post.errors.any? %>
+      <div class="card text-center text-white bg-danger mb-3">
+        <%= @post.errors.count %>件のエラーが発生しました
+        <% @post.errors.full_messages.each do |message| %>
+          <%= message %>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="row">
       <%= form_with model: @post, local:true do |f| %>
         <div class="form-group mb-3">
