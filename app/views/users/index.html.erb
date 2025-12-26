@@ -3,6 +3,8 @@
     <div class="row mt-5">
       <h1 class="font-weight-normal">ユーザ一覧</h1>
     </div>
+    <%= render 'index', users: @users, user: @user %>
+
     <div class="row mt-5 w-50">
       <% @users.each do |user| %>
         <div class="one-post card mt-3">
