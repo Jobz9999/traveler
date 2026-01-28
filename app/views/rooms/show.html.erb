@@ -1,0 +1,45 @@
+<div class="chat-container">
+
+  <!-- ヘッダー -->
+  <% partner = @room.users.find { |u| u.id != current_user.id } %>
+  <div class="chat-header">
+    <%= partner&.name %>
+  </div>
+
+  <!-- メッセージ一覧 -->
+  <div class="chat-messages">
+    <% @messages.each do |message| %>
+      <% if message.user == current_user %>
+        <!-- 自分 -->
+        <div class="message-row right">
+          <div class="message-bubble self">
+            <%= message.content %>
+          </div>
+        </div>
+      <% else %>
+        <!-- 相手 -->
+        <div class="message-row left">
+          <div class="message-bubble other">
+            <%= message.content %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- 入力フォーム -->
+  <div class="chat-form">
+    <%= form_with model: @message,
+                  url: room_messages_path(@room),
+                  local: true do |f| %>
+
+      <%= f.text_field :content,
+          placeholder: "メッセージを入力",
+          maxlength: 140,
+          class: "chat-input" %>
+
+      <%= f.submit "送信", class: "chat-send" %>
+    <% end %>
+  </div>
+
+</div>

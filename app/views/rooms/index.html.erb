@@ -1,0 +1,17 @@
+<h1>DM一覧</h1>
+
+<% if @rooms.any? %>
+  <% @rooms.each do |room| %>
+    <% partner = room.users.find { |u| u.id != current_user.id } %>
+    <% next unless partner %>
+
+    <div class="dm-room" style="margin-bottom: 10px;">
+      <!-- ② ここが「チャット画面へのリンク」 -->
+      <%= link_to room_path(room) do %>
+        <strong><%= partner.name %></strong> さんとのチャット
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>まだDMはありません。</p>
+<% end %>

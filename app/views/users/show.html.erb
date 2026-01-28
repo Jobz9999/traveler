@@ -5,6 +5,15 @@
         <h1 class="font-weight-normal">マイページ</h1>
       <% else %>
         <h1 class="font-weight-normal"><%= @user.name %>さんのページ</h1>
+
+        <% if current_user.mutual_follow?(@user) %>
+           <div class="mt-3">
+            <%= link_to "DMしようぜ",
+                rooms_path(user_id: @user.id),
+                method: :post,
+                class: "btn btn-primary" %>
+           </div>
+        <% end %> 
       <% end %>
     </div>
 

@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
+  #以下DM機能
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :rooms, through: :entries #追記
 
   attachment :profile_image
 
@@ -27,6 +31,11 @@ class User < ApplicationRecord
   # フォローしていればtrueを返す
   def following?(user)
     following_user.include?(user)
+  end
+
+  # 相互フォロー判定（&&相互フォローのときだけtrue）
+  def mutual_follow?(other_user)
+    following?(other_user) && other_user.following?(self)
   end
 
   validates :name, presence: true

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
         get 'confirm'
       end
     end
+
+    resources :rooms, only: [:index, :show, :create] do
+      resources :messages, only: [:create]  
+    end
     
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
